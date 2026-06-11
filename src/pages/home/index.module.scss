@@ -1,0 +1,176 @@
+@use '@/styles/variables.scss' as *;
+
+.page {
+  min-height: 100vh;
+  padding-bottom: 120rpx;
+}
+
+.header {
+  padding: $spacing-lg $page-padding $spacing-md;
+  background: linear-gradient(135deg, $color-primary 0%, $color-primary-light 100%);
+}
+
+.topBar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: $spacing-lg;
+}
+
+.location {
+  display: flex;
+  align-items: center;
+  color: $color-text-white;
+  font-size: $font-size-md;
+}
+
+.locationIcon {
+  margin-right: $spacing-xs;
+}
+
+.searchBar {
+  display: flex;
+  align-items: center;
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: $radius-button;
+  padding: 0 $spacing-lg;
+  height: 72rpx;
+}
+
+.searchIcon {
+  color: $color-text-tertiary;
+  margin-right: $spacing-sm;
+  font-size: $font-size-lg;
+}
+
+.searchInput {
+  flex: 1;
+  font-size: $font-size-md;
+  color: $color-text-primary;
+}
+
+.searchPlaceholder {
+  color: $color-text-tertiary;
+  font-size: $font-size-md;
+}
+
+.banner {
+  margin: $spacing-md $page-padding;
+  height: 240rpx;
+  border-radius: $radius-lg;
+  background: linear-gradient(135deg, #FFE4D6 0%, #FFD0B8 100%);
+  display: flex;
+  align-items: center;
+  padding: 0 $spacing-xl;
+  box-shadow: $shadow-card;
+}
+
+.bannerContent {
+  flex: 1;
+}
+
+.bannerTitle {
+  font-size: $font-size-xxl;
+  font-weight: $font-weight-bold;
+  color: $color-primary-dark;
+  margin-bottom: $spacing-xs;
+  display: block;
+}
+
+.bannerDesc {
+  font-size: $font-size-sm;
+  color: $color-text-secondary;
+  display: block;
+}
+
+.bannerEmoji {
+  font-size: 100rpx;
+}
+
+.categorySection {
+  padding: $spacing-md $page-padding;
+}
+
+.sectionTitle {
+  font-size: $font-size-xl;
+  font-weight: $font-weight-semibold;
+  color: $color-text-primary;
+  margin-bottom: $spacing-md;
+}
+
+.categoryGrid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: $spacing-md;
+  background: $color-bg-card;
+  border-radius: $radius-lg;
+  padding: $spacing-lg;
+  box-shadow: $shadow-card;
+}
+
+.categoryItem {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  transition: all $transition-base;
+
+  &:active {
+    transform: scale(0.95);
+  }
+}
+
+.categoryIcon {
+  width: 96rpx;
+  height: 96rpx;
+  border-radius: $radius-lg;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 44rpx;
+  margin-bottom: $spacing-sm;
+}
+
+.categoryName {
+  font-size: $font-size-sm;
+  color: $color-text-primary;
+}
+
+.courseSection {
+  padding: $spacing-md $page-padding;
+}
+
+.sectionHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: $spacing-md;
+}
+
+.moreLink {
+  font-size: $font-size-sm;
+  color: $color-primary;
+}
+
+.filterRow {
+  display: flex;
+  overflow-x: auto;
+  padding-bottom: $spacing-md;
+  @include scroll-x-container;
+}
+
+.filterItem {
+  @include scroll-x-item(auto);
+  padding: 12rpx 28rpx;
+  background: $color-bg-card;
+  border-radius: $radius-button;
+  margin-right: $spacing-sm;
+  font-size: $font-size-sm;
+  color: $color-text-secondary;
+  white-space: nowrap;
+  transition: all $transition-base;
+}
+
+.filterItemActive {
+  background: linear-gradient(135deg, $color-primary 0%, $color-secondary 100%);
+  color: $color-text-white;
+}

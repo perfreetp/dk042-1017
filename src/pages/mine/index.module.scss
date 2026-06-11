@@ -1,0 +1,183 @@
+@use '@/styles/variables.scss' as *;
+
+.page {
+  min-height: 100vh;
+  padding-bottom: 120rpx;
+}
+
+.header {
+  background: linear-gradient(135deg, $color-primary 0%, $color-primary-light 100%);
+  padding: $spacing-xl $page-padding $spacing-xl * 2;
+}
+
+.userRow {
+  display: flex;
+  align-items: center;
+}
+
+.avatar {
+  width: 128rpx;
+  height: 128rpx;
+  border-radius: $radius-round;
+  border: 4rpx solid rgba(255, 255, 255, 0.5);
+  margin-right: $spacing-lg;
+}
+
+.userInfo {
+  flex: 1;
+}
+
+.userName {
+  font-size: $font-size-xxl;
+  font-weight: $font-weight-bold;
+  color: $color-text-white;
+  display: flex;
+  align-items: center;
+  margin-bottom: $spacing-xs;
+}
+
+.certifiedBadge {
+  margin-left: $spacing-sm;
+  background: rgba(255, 255, 255, 0.25);
+  padding: 4rpx 14rpx;
+  border-radius: $radius-xs;
+  font-size: 20rpx;
+  font-weight: $font-weight-normal;
+}
+
+.community {
+  font-size: $font-size-sm;
+  color: rgba(255, 255, 255, 0.85);
+}
+
+.pointsCard {
+  margin: -60rpx $page-padding $spacing-lg;
+  background: $color-bg-card;
+  border-radius: $radius-lg;
+  padding: $spacing-lg;
+  box-shadow: $shadow-float;
+  display: flex;
+  align-items: center;
+}
+
+.pointsInfo {
+  flex: 1;
+}
+
+.pointsLabel {
+  font-size: $font-size-sm;
+  color: $color-text-secondary;
+  display: block;
+  margin-bottom: $spacing-xs;
+}
+
+.pointsValue {
+  font-size: 48rpx;
+  font-weight: $font-weight-bold;
+  color: $color-primary;
+  display: block;
+}
+
+.pointsBtn {
+  @include button-reset;
+  padding: 16rpx 32rpx;
+  background: linear-gradient(135deg, $color-primary 0%, $color-secondary 100%);
+  color: $color-text-white;
+  border-radius: $radius-button;
+  font-size: $font-size-sm;
+  height: auto;
+
+  &:active {
+    opacity: 0.85;
+  }
+}
+
+.statsRow {
+  margin: 0 $page-padding $spacing-lg;
+  background: $color-bg-card;
+  border-radius: $radius-lg;
+  padding: $spacing-lg 0;
+  box-shadow: $shadow-card;
+  display: flex;
+}
+
+.statItem {
+  flex: 1;
+  text-align: center;
+  border-right: 1rpx solid $color-divider;
+
+  &:last-child {
+    border-right: none;
+  }
+}
+
+.statValue {
+  font-size: $font-size-xxl;
+  font-weight: $font-weight-bold;
+  color: $color-text-primary;
+  display: block;
+  margin-bottom: 4rpx;
+}
+
+.statLabel {
+  font-size: $font-size-xs;
+  color: $color-text-tertiary;
+}
+
+.menuSection {
+  margin: 0 $page-padding;
+  background: $color-bg-card;
+  border-radius: $radius-lg;
+  box-shadow: $shadow-card;
+  overflow: hidden;
+  margin-bottom: $spacing-md;
+}
+
+.menuTitle {
+  padding: $spacing-lg $spacing-lg $spacing-sm;
+  font-size: $font-size-sm;
+  color: $color-text-tertiary;
+}
+
+.menuItem {
+  display: flex;
+  align-items: center;
+  padding: $spacing-lg;
+  border-top: 1rpx solid $color-divider;
+  transition: all $transition-base;
+
+  &:active {
+    background: $color-bg-hover;
+  }
+}
+
+.menuIcon {
+  width: 64rpx;
+  height: 64rpx;
+  border-radius: $radius-md;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 32rpx;
+  margin-right: $spacing-md;
+}
+
+.menuText {
+  flex: 1;
+  font-size: $font-size-md;
+  color: $color-text-primary;
+}
+
+.menuArrow {
+  color: $color-text-tertiary;
+  font-size: $font-size-md;
+}
+
+.badge {
+  background: $color-error;
+  color: $color-text-white;
+  font-size: 20rpx;
+  padding: 2rpx 12rpx;
+  border-radius: $radius-round;
+  margin-right: $spacing-sm;
+}

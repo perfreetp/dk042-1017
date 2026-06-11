@@ -1,0 +1,157 @@
+@use '@/styles/variables.scss' as *;
+
+.page {
+  min-height: 100vh;
+  padding: 0 $page-padding;
+  padding-bottom: 120rpx;
+}
+
+.tabBar {
+  display: flex;
+  background: $color-bg-card;
+  border-radius: $radius-button;
+  margin: $spacing-lg 0;
+  padding: 8rpx;
+  box-shadow: $shadow-card;
+}
+
+.tabItem {
+  flex: 1;
+  text-align: center;
+  padding: 20rpx 0;
+  border-radius: $radius-button;
+  font-size: $font-size-md;
+  color: $color-text-secondary;
+  transition: all $transition-base;
+}
+
+.tabItemActive {
+  background: linear-gradient(135deg, $color-primary 0%, $color-secondary 100%);
+  color: $color-text-white;
+  font-weight: $font-weight-semibold;
+}
+
+.courseCard {
+  background: $color-bg-card;
+  border-radius: $radius-lg;
+  padding: $spacing-lg;
+  margin-bottom: $spacing-md;
+  box-shadow: $shadow-card;
+  transition: all $transition-base;
+
+  &:active {
+    transform: scale(0.99);
+  }
+}
+
+.cardHeader {
+  display: flex;
+  margin-bottom: $spacing-md;
+}
+
+.cover {
+  width: 180rpx;
+  height: 135rpx;
+  border-radius: $radius-md;
+  margin-right: $spacing-md;
+}
+
+.infoWrap {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.title {
+  font-size: $font-size-lg;
+  font-weight: $font-weight-semibold;
+  color: $color-text-primary;
+  @include text-ellipsis;
+}
+
+.meta {
+  font-size: $font-size-sm;
+  color: $color-text-secondary;
+}
+
+.statusBadge {
+  display: inline-block;
+  padding: 4rpx 16rpx;
+  border-radius: $radius-xs;
+  font-size: $font-size-xs;
+  color: $color-text-white;
+  align-self: flex-start;
+}
+
+.timeRow {
+  display: flex;
+  align-items: center;
+  padding: $spacing-sm 0;
+  border-top: 1rpx solid $color-divider;
+  border-bottom: 1rpx solid $color-divider;
+  margin-bottom: $spacing-md;
+}
+
+.timeLabel {
+  font-size: $font-size-sm;
+  color: $color-text-tertiary;
+  margin-right: $spacing-sm;
+}
+
+.timeValue {
+  font-size: $font-size-sm;
+  color: $color-text-primary;
+  font-weight: $font-weight-medium;
+}
+
+.actionRow {
+  display: flex;
+  gap: $spacing-sm;
+}
+
+.actionBtn {
+  @include button-reset;
+  flex: 1;
+  height: $button-height-md;
+  border-radius: $radius-button;
+  font-size: $font-size-sm;
+  background: $color-bg-tag;
+  color: $color-primary;
+  border: 1rpx solid transparent;
+
+  &:active {
+    opacity: 0.8;
+  }
+}
+
+.actionBtnPrimary {
+  background: linear-gradient(135deg, $color-primary 0%, $color-secondary 100%);
+  color: $color-text-white;
+}
+
+.actionBtnOutline {
+  background: $color-bg-card;
+  border: 1rpx solid $color-border;
+  color: $color-text-secondary;
+}
+
+.feedbackSection {
+  margin-top: $spacing-md;
+  padding: $spacing-md;
+  background: linear-gradient(135deg, #E8F8F5 0%, #D1F2EB 100%);
+  border-radius: $radius-md;
+}
+
+.feedbackLabel {
+  font-size: $font-size-xs;
+  color: $color-info;
+  margin-bottom: $spacing-xs;
+  display: block;
+}
+
+.feedbackText {
+  font-size: $font-size-sm;
+  color: $color-text-primary;
+  line-height: 1.6;
+}

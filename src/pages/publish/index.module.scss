@@ -1,0 +1,177 @@
+@use '@/styles/variables.scss' as *;
+
+.page {
+  min-height: 100vh;
+  padding: 0 $page-padding;
+  padding-bottom: 120rpx;
+}
+
+.publishCard {
+  margin: $spacing-lg 0;
+  background: linear-gradient(135deg, $color-primary 0%, $color-secondary 100%);
+  border-radius: $radius-lg;
+  padding: $spacing-xl;
+  box-shadow: $shadow-float;
+}
+
+.publishTitle {
+  font-size: $font-size-xxl;
+  font-weight: $font-weight-bold;
+  color: $color-text-white;
+  margin-bottom: $spacing-sm;
+  display: block;
+}
+
+.publishDesc {
+  font-size: $font-size-sm;
+  color: rgba(255, 255, 255, 0.85);
+  margin-bottom: $spacing-lg;
+  display: block;
+}
+
+.publishBtn {
+  @include button-reset;
+  width: 100%;
+  height: $button-height-lg;
+  border-radius: $radius-button;
+  background: $color-bg-card;
+  color: $color-primary;
+  font-size: $font-size-lg;
+  font-weight: $font-weight-semibold;
+
+  &:active {
+    opacity: 0.9;
+    transform: scale(0.98);
+  }
+}
+
+.teacherStatus {
+  margin-top: $spacing-md;
+  display: flex;
+  align-items: center;
+  padding: $spacing-md;
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: $radius-md;
+}
+
+.statusIcon {
+  font-size: 40rpx;
+  margin-right: $spacing-sm;
+}
+
+.statusText {
+  font-size: $font-size-sm;
+  color: $color-text-white;
+  flex: 1;
+}
+
+.statusLink {
+  font-size: $font-size-sm;
+  color: $color-text-white;
+  text-decoration: underline;
+}
+
+.section {
+  margin-top: $spacing-lg;
+}
+
+.sectionHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: $spacing-md;
+}
+
+.sectionTitle {
+  font-size: $font-size-xl;
+  font-weight: $font-weight-semibold;
+  color: $color-text-primary;
+}
+
+.sectionMore {
+  font-size: $font-size-sm;
+  color: $color-primary;
+}
+
+.myCourseCard {
+  background: $color-bg-card;
+  border-radius: $radius-lg;
+  padding: $spacing-lg;
+  margin-bottom: $spacing-md;
+  box-shadow: $shadow-card;
+  display: flex;
+}
+
+.cover {
+  width: 200rpx;
+  height: 150rpx;
+  border-radius: $radius-md;
+  margin-right: $spacing-md;
+}
+
+.courseInfo {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.courseTitle {
+  font-size: $font-size-lg;
+  font-weight: $font-weight-semibold;
+  color: $color-text-primary;
+  @include text-ellipsis;
+}
+
+.courseMeta {
+  font-size: $font-size-sm;
+  color: $color-text-secondary;
+}
+
+.courseFooter {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.statusBadge {
+  padding: 4rpx 16rpx;
+  border-radius: $radius-xs;
+  font-size: $font-size-xs;
+  color: $color-text-white;
+}
+
+.manageBtn {
+  @include button-reset;
+  padding: 8rpx 24rpx;
+  border-radius: $radius-button;
+  background: $color-bg-tag;
+  color: $color-primary;
+  font-size: $font-size-sm;
+  height: auto;
+
+  &:active {
+    opacity: 0.8;
+  }
+}
+
+.tipCard {
+  margin-top: $spacing-lg;
+  background: linear-gradient(135deg, #FFF9E6 0%, #FFF3CD 100%);
+  border-radius: $radius-lg;
+  padding: $spacing-lg;
+}
+
+.tipTitle {
+  font-size: $font-size-md;
+  font-weight: $font-weight-semibold;
+  color: $color-warning;
+  margin-bottom: $spacing-sm;
+  display: block;
+}
+
+.tipText {
+  font-size: $font-size-sm;
+  color: $color-text-secondary;
+  line-height: 1.8;
+}
