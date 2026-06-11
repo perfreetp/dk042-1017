@@ -4,13 +4,13 @@ import Taro from '@tarojs/taro';
 import classnames from 'classnames';
 import styles from './index.module.scss';
 import { categories } from '@/data/categories';
-import { courses } from '@/data/courses';
 import CourseCard from '@/components/CourseCard';
-import { currentUser } from '@/data/user';
+import { useApp } from '@/store/app';
 
 const HomePage: React.FC = () => {
   const [activeCategory, setActiveCategory] = useState<string>('all');
   const [activeFilter, setActiveFilter] = useState<string>('all');
+  const { courses, user } = useApp();
 
   const filters = [
     { id: 'all', name: '全部' },
@@ -43,7 +43,7 @@ const HomePage: React.FC = () => {
         <View className={styles.topBar}>
           <View className={styles.location}>
             <Text className={styles.locationIcon}>📍</Text>
-            <Text>{currentUser.community}</Text>
+            <Text>{user.community}</Text>
           </View>
           <Text style={{ color: '#fff', fontSize: '44rpx' }}>🔔</Text>
         </View>

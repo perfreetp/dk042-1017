@@ -38,10 +38,6 @@
   margin-bottom: $spacing-md;
   box-shadow: $shadow-card;
   transition: all $transition-base;
-
-  &:active {
-    transform: scale(0.99);
-  }
 }
 
 .cardHeader {
@@ -54,6 +50,7 @@
   height: 135rpx;
   border-radius: $radius-md;
   margin-right: $spacing-md;
+  flex-shrink: 0;
 }
 
 .infoWrap {
@@ -68,6 +65,7 @@
   font-weight: $font-weight-semibold;
   color: $color-text-primary;
   @include text-ellipsis;
+  line-height: 1.4;
 }
 
 .meta {
@@ -136,8 +134,13 @@
   color: $color-text-secondary;
 }
 
+.actionBtnDisabled {
+  background: $color-bg-hover;
+  color: $color-text-tertiary;
+}
+
 .feedbackSection {
-  margin-top: $spacing-md;
+  margin-bottom: $spacing-md;
   padding: $spacing-md;
   background: linear-gradient(135deg, #E8F8F5 0%, #D1F2EB 100%);
   border-radius: $radius-md;
@@ -154,4 +157,50 @@
   font-size: $font-size-sm;
   color: $color-text-primary;
   line-height: 1.6;
+}
+
+.workSection {
+  margin-bottom: $spacing-md;
+}
+
+.workLabel {
+  font-size: $font-size-sm;
+  color: $color-text-secondary;
+  margin-bottom: $spacing-sm;
+  display: block;
+}
+
+.workImages {
+  display: flex;
+  gap: $spacing-sm;
+}
+
+.workImg {
+  width: 120rpx;
+  height: 120rpx;
+  border-radius: $radius-md;
+}
+
+.submittedTag {
+  display: inline-flex;
+  align-items: center;
+  padding: 4rpx 16rpx;
+  background: rgba(0, 180, 42, 0.1);
+  color: $color-success;
+  font-size: $font-size-xs;
+  border-radius: $radius-xs;
+  margin-left: $spacing-sm;
+}
+
+.cancelledCard {
+  opacity: 0.6;
+}
+
+.cancelledTag {
+  background: $color-error;
+  color: $color-text-white;
+  font-size: $font-size-xs;
+  padding: 4rpx 16rpx;
+  border-radius: $radius-xs;
+  display: inline-block;
 }

@@ -10,7 +10,10 @@ export default defineAppConfig({
     'pages/manage/index',
     'pages/notice/index',
     'pages/points/index',
-    'pages/feedback/index'
+    'pages/feedback/index',
+    'pages/certify/index',
+    'pages/review/index',
+    'pages/checkin/index'
   ],
   window: {
     backgroundTextStyle: 'light',

@@ -53,35 +53,6 @@
   margin-right: $spacing-sm;
 }
 
-.typeGrid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: $spacing-sm;
-  margin-bottom: $spacing-lg;
-}
-
-.typeItem {
-  padding: $spacing-md 0;
-  text-align: center;
-  border: 2rpx solid $color-border;
-  border-radius: $radius-md;
-  font-size: $font-size-sm;
-  color: $color-text-secondary;
-  transition: all $transition-base;
-
-  &:active {
-    border-color: $color-primary;
-    background: $color-bg-hover;
-  }
-}
-
-.typeItemActive {
-  border-color: $color-primary;
-  background: $color-bg-tag;
-  color: $color-primary;
-  font-weight: $font-weight-medium;
-}
-
 .formItem {
   margin-bottom: $spacing-lg;
 
@@ -117,7 +88,7 @@
 
 .formTextarea {
   width: 100%;
-  height: 240rpx;
+  height: 200rpx;
   padding: $spacing-md;
   background: $color-bg-page;
   border: 1rpx solid $color-border;
@@ -128,13 +99,6 @@
   line-height: 1.6;
 }
 
-.wordCount {
-  text-align: right;
-  font-size: $font-size-xs;
-  color: $color-text-tertiary;
-  margin-top: $spacing-xs;
-}
-
 .uploadArea {
   display: flex;
   flex-wrap: wrap;
@@ -142,8 +106,8 @@
 }
 
 .uploadItem {
-  width: 160rpx;
-  height: 160rpx;
+  width: 200rpx;
+  height: 200rpx;
   border-radius: $radius-md;
   overflow: hidden;
   position: relative;
@@ -171,8 +135,8 @@
 }
 
 .uploadBtn {
-  width: 160rpx;
-  height: 160rpx;
+  width: 200rpx;
+  height: 200rpx;
   border: 2rpx dashed $color-border;
   border-radius: $radius-md;
   display: flex;
@@ -189,12 +153,33 @@
 }
 
 .uploadIcon {
-  font-size: 48rpx;
-  margin-bottom: 4rpx;
+  font-size: 56rpx;
+  margin-bottom: 8rpx;
 }
 
 .uploadText {
-  font-size: 20rpx;
+  font-size: $font-size-xs;
+}
+
+.tipCard {
+  background: linear-gradient(135deg, #E8F8F5 0%, #D1F2EB 100%);
+  border-radius: $radius-lg;
+  padding: $spacing-lg;
+  margin-bottom: $spacing-md;
+}
+
+.tipTitle {
+  font-size: $font-size-md;
+  font-weight: $font-weight-semibold;
+  color: $color-info;
+  margin-bottom: $spacing-sm;
+  display: block;
+}
+
+.tipText {
+  font-size: $font-size-sm;
+  color: $color-text-secondary;
+  line-height: 1.8;
 }
 
 .recordItem {
@@ -217,31 +202,17 @@
   font-size: $font-size-md;
   font-weight: $font-weight-medium;
   color: $color-text-primary;
-  @include text-ellipsis;
-  flex: 1;
-  margin-right: $spacing-sm;
-}
-
-.recordType {
-  font-size: 20rpx;
-  padding: 2rpx 12rpx;
-  background: $color-bg-tag;
-  color: $color-primary;
-  border-radius: $radius-xs;
-  flex-shrink: 0;
 }
 
 .recordStatus {
-  font-size: 20rpx;
-  padding: 2rpx 12rpx;
+  font-size: $font-size-xs;
+  padding: 4rpx 16rpx;
   border-radius: $radius-xs;
   color: $color-text-white;
-  flex-shrink: 0;
-  margin-left: $spacing-sm;
 }
 
 .recordMeta {
-  font-size: $font-size-xs;
+  font-size: $font-size-sm;
   color: $color-text-tertiary;
   margin-bottom: $spacing-xs;
 }
@@ -280,23 +251,6 @@
   }
 }
 
-.tipCard {
-  background: linear-gradient(135deg, #E8F8F5 0%, #D1F2EB 100%);
-  border-radius: $radius-lg;
-  padding: $spacing-lg;
-  margin-bottom: $spacing-md;
-}
-
-.tipTitle {
-  font-size: $font-size-md;
-  font-weight: $font-weight-semibold;
-  color: $color-info;
-  margin-bottom: $spacing-sm;
-  display: block;
-}
-
-.tipText {
-  font-size: $font-size-sm;
-  color: $color-text-secondary;
-  line-height: 1.8;
+.submitBtnDisabled {
+  background: $color-text-disabled;
 }

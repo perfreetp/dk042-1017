@@ -2,25 +2,312 @@
 
 .page {
   min-height: 100vh;
-  padding: $spacing-xl * 2 $page-padding;
-  text-align: center;
+  padding-bottom: 140rpx;
+  background: $color-bg-page;
 }
 
-.icon {
-  font-size: 120rpx;
-  margin-bottom: $spacing-lg;
+.cover {
+  width: 100%;
+  height: 420rpx;
   display: block;
+}
+
+.content {
+  padding: 0 $page-padding;
+  margin-top: -40rpx;
+  position: relative;
+  z-index: 1;
+}
+
+.infoCard {
+  background: $color-bg-card;
+  border-radius: $radius-lg;
+  padding: $spacing-lg;
+  box-shadow: $shadow-card;
+  margin-bottom: $spacing-md;
+}
+
+.titleRow {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  margin-bottom: $spacing-sm;
 }
 
 .title {
+  flex: 1;
   font-size: $font-size-xxl;
-  font-weight: $font-weight-semibold;
+  font-weight: $font-weight-bold;
   color: $color-text-primary;
-  margin-bottom: $spacing-sm;
-  display: block;
+  line-height: 1.4;
+  margin-right: $spacing-md;
 }
 
-.desc {
+.favoriteBtn {
+  font-size: 48rpx;
+  line-height: 1;
+  transition: all $transition-base;
+
+  &:active {
+    transform: scale(1.2);
+  }
+}
+
+.tagRow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $spacing-sm;
+  margin-bottom: $spacing-md;
+}
+
+.tag {
+  padding: 6rpx 20rpx;
+  background: $color-bg-tag;
+  color: $color-primary;
+  font-size: $font-size-xs;
+  border-radius: $radius-sm;
+}
+
+.categoryTag {
+  background: linear-gradient(135deg, $color-primary 0%, $color-secondary 100%);
+  color: $color-text-white;
+}
+
+.metaRow {
+  display: flex;
+  align-items: center;
+  padding-top: $spacing-md;
+  border-top: 1rpx solid $color-divider;
+}
+
+.metaItem {
+  flex: 1;
+  text-align: center;
+  border-right: 1rpx solid $color-divider;
+
+  &:last-child {
+    border-right: none;
+  }
+}
+
+.metaValue {
+  font-size: $font-size-lg;
+  font-weight: $font-weight-semibold;
+  color: $color-text-primary;
+  display: block;
+  margin-bottom: 4rpx;
+}
+
+.metaLabel {
+  font-size: $font-size-xs;
+  color: $color-text-tertiary;
+}
+
+.section {
+  background: $color-bg-card;
+  border-radius: $radius-lg;
+  padding: $spacing-lg;
+  box-shadow: $shadow-card;
+  margin-bottom: $spacing-md;
+}
+
+.sectionTitle {
+  font-size: $font-size-lg;
+  font-weight: $font-weight-semibold;
+  color: $color-text-primary;
+  margin-bottom: $spacing-md;
+  display: flex;
+  align-items: center;
+}
+
+.sectionIcon {
+  margin-right: $spacing-sm;
+}
+
+.teacherRow {
+  display: flex;
+  align-items: center;
+}
+
+.teacherAvatar {
+  width: 96rpx;
+  height: 96rpx;
+  border-radius: $radius-round;
+  margin-right: $spacing-md;
+}
+
+.teacherInfo {
+  flex: 1;
+}
+
+.teacherName {
+  font-size: $font-size-lg;
+  font-weight: $font-weight-semibold;
+  color: $color-text-primary;
+  display: flex;
+  align-items: center;
+  margin-bottom: 4rpx;
+}
+
+.certBadge {
+  margin-left: $spacing-sm;
+  font-size: 20rpx;
+  padding: 2rpx 12rpx;
+  background: linear-gradient(135deg, $color-primary 0%, $color-secondary 100%);
+  color: $color-text-white;
+  border-radius: $radius-xs;
+}
+
+.teacherRating {
+  font-size: $font-size-sm;
+  color: $color-warning;
+  margin-bottom: 4rpx;
+}
+
+.teacherIntro {
+  font-size: $font-size-sm;
+  color: $color-text-secondary;
+  line-height: 1.6;
+  margin-top: $spacing-sm;
+}
+
+.infoList {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-md;
+}
+
+.infoItem {
+  display: flex;
+  align-items: flex-start;
+}
+
+.infoLabel {
+  width: 140rpx;
+  flex-shrink: 0;
   font-size: $font-size-md;
   color: $color-text-tertiary;
+}
+
+.infoValue {
+  flex: 1;
+  font-size: $font-size-md;
+  color: $color-text-primary;
+  line-height: 1.6;
+}
+
+.sessionItem {
+  padding: $spacing-md;
+  border: 1rpx solid $color-border;
+  border-radius: $radius-md;
+  margin-bottom: $spacing-sm;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  transition: all $transition-base;
+
+  &:active {
+    border-color: $color-primary;
+  }
+}
+
+.sessionInfo {
+  flex: 1;
+}
+
+.sessionDate {
+  font-size: $font-size-md;
+  font-weight: $font-weight-medium;
+  color: $color-text-primary;
+  margin-bottom: 4rpx;
+}
+
+.sessionTime {
+  font-size: $font-size-sm;
+  color: $color-text-secondary;
+}
+
+.sessionCapacity {
+  text-align: right;
+}
+
+.sessionCount {
+  font-size: $font-size-sm;
+  color: $color-text-secondary;
+  margin-bottom: 4rpx;
+}
+
+.sessionStatus {
+  font-size: $font-size-xs;
+  font-weight: $font-weight-medium;
+}
+
+.statusHot {
+  color: $color-error;
+}
+
+.statusOk {
+  color: $color-success;
+}
+
+.descText {
+  font-size: $font-size-md;
+  color: $color-text-secondary;
+  line-height: 1.8;
+}
+
+.bottomBar {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: $color-bg-card;
+  padding: $spacing-md $page-padding;
+  padding-bottom: calc($spacing-md + env(safe-area-inset-bottom));
+  box-shadow: 0 -4rpx 16rpx rgba(0, 0, 0, 0.08);
+  display: flex;
+  align-items: center;
+  gap: $spacing-md;
+  z-index: 100;
+}
+
+.priceInfo {
+  flex: 1;
+}
+
+.priceLabel {
+  font-size: $font-size-xs;
+  color: $color-text-tertiary;
+  display: block;
+  margin-bottom: 4rpx;
+}
+
+.priceValue {
+  font-size: $font-size-xxl;
+  font-weight: $font-weight-bold;
+  color: $color-price;
+}
+
+.freeText {
+  color: $color-success;
+}
+
+.enrollBtn {
+  @include button-reset;
+  width: 280rpx;
+  height: $button-height-lg;
+  background: linear-gradient(135deg, $color-primary 0%, $color-secondary 100%);
+  color: $color-text-white;
+  font-size: $font-size-lg;
+  font-weight: $font-weight-semibold;
+  border-radius: $radius-button;
+
+  &:active {
+    opacity: 0.9;
+    transform: scale(0.98);
+  }
+}
+
+.enrollBtnDisabled {
+  background: $color-text-disabled;
 }

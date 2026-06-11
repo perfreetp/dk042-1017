@@ -2,10 +2,11 @@ import React from 'react';
 import { View, Text, Image, Button } from '@tarojs/components';
 import Taro from '@tarojs/taro';
 import styles from './index.module.scss';
-import { currentUser, notifications } from '@/data/user';
-import { enrolledCourses, publishedCourses, courses } from '@/data/courses';
+import { useApp } from '@/store/app';
 
 const MinePage: React.FC = () => {
+  const { user, enrolledCourses, publishedCourses, courses, notifications } = useApp();
+  
   const unreadCount = notifications.filter(n => !n.read).length;
   const favoriteCount = courses.filter(c => c.isFavorite).length;
 
@@ -39,9 +40,9 @@ const MinePage: React.FC = () => {
       favorite: '',
       notice: '/pages/notice/index',
       points: '/pages/points/index',
-      checkin: '',
-      certify: '',
-      review: '',
+      checkin: '/pages/checkin/index',
+      certify: '/pages/certify/index',
+      review: '/pages/review/index',
       feedback: '/pages/feedback/index'
     };
 
@@ -62,15 +63,15 @@ const MinePage: React.FC = () => {
     <View className={styles.page}>
       <View className={styles.header}>
         <View className={styles.userRow}>
-          <Image className={styles.avatar} src={currentUser.avatar} mode="aspectFill" />
+          <Image className={styles.avatar} src={user.avatar} mode="aspectFill" />
           <View className={styles.userInfo}>
             <View className={styles.userName}>
-              {currentUser.name}
-              {currentUser.certified && (
+              {user.name}
+              {user.certified && (
                 <View className={styles.certifiedBadge}>✓ 认证老师</View>
               )}
             </View>
-            <Text className={styles.community}>🏘 {currentUser.community}</Text>
+            <Text className={styles.community}>🏘 {user.community}</Text>
           </View>
         </View>
       </View>
@@ -78,7 +79,7 @@ const MinePage: React.FC = () => {
       <View className={styles.pointsCard}>
         <View className={styles.pointsInfo}>
           <Text className={styles.pointsLabel}>我的邻里积分</Text>
-          <Text className={styles.pointsValue}>{currentUser.points}</Text>
+          <Text className={styles.pointsValue}>{user.points}</Text>
         </View>
         <Button className={styles.pointsBtn} onClick={handleViewPoints}>
           积分明细 ›

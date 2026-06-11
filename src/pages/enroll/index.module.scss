@@ -2,25 +2,261 @@
 
 .page {
   min-height: 100vh;
-  padding: $spacing-xl * 2 $page-padding;
-  text-align: center;
+  padding: $spacing-md $page-padding;
+  padding-bottom: 160rpx;
+  background: $color-bg-page;
 }
 
-.icon {
-  font-size: 120rpx;
-  margin-bottom: $spacing-lg;
-  display: block;
+.courseHeader {
+  display: flex;
+  background: $color-bg-card;
+  border-radius: $radius-lg;
+  padding: $spacing-md;
+  margin-bottom: $spacing-md;
+  box-shadow: $shadow-card;
 }
 
-.title {
-  font-size: $font-size-xxl;
+.cover {
+  width: 180rpx;
+  height: 135rpx;
+  border-radius: $radius-md;
+  margin-right: $spacing-md;
+  flex-shrink: 0;
+}
+
+.courseInfo {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.courseTitle {
+  font-size: $font-size-lg;
   font-weight: $font-weight-semibold;
+  color: $color-text-primary;
+  @include text-ellipsis;
+}
+
+.courseTeacher {
+  font-size: $font-size-sm;
+  color: $color-text-secondary;
+}
+
+.courseFee {
+  font-size: $font-size-lg;
+  font-weight: $font-weight-bold;
+  color: $color-price;
+}
+
+.freeFee {
+  color: $color-success;
+}
+
+.section {
+  background: $color-bg-card;
+  border-radius: $radius-lg;
+  padding: $spacing-lg;
+  box-shadow: $shadow-card;
+  margin-bottom: $spacing-md;
+}
+
+.sectionTitle {
+  font-size: $font-size-lg;
+  font-weight: $font-weight-semibold;
+  color: $color-text-primary;
+  margin-bottom: $spacing-md;
+  display: flex;
+  align-items: center;
+}
+
+.sectionIcon {
+  margin-right: $spacing-sm;
+}
+
+.sessionList {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-sm;
+}
+
+.sessionItem {
+  padding: $spacing-md;
+  border: 2rpx solid $color-border;
+  border-radius: $radius-md;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  transition: all $transition-base;
+
+  &:active {
+    border-color: $color-primary;
+    background: $color-bg-hover;
+  }
+}
+
+.sessionItemActive {
+  border-color: $color-primary;
+  background: $color-bg-tag;
+}
+
+.sessionDisabled {
+  opacity: 0.6;
+}
+
+.sessionLeft {
+  flex: 1;
+}
+
+.sessionDate {
+  font-size: $font-size-md;
+  font-weight: $font-weight-medium;
+  color: $color-text-primary;
+  margin-bottom: 4rpx;
+}
+
+.sessionTime {
+  font-size: $font-size-sm;
+  color: $color-text-secondary;
+}
+
+.sessionRight {
+  text-align: right;
+}
+
+.sessionCount {
+  font-size: $font-size-sm;
+  color: $color-text-secondary;
+  margin-bottom: 4rpx;
+}
+
+.sessionStatus {
+  font-size: $font-size-xs;
+  font-weight: $font-weight-medium;
+}
+
+.statusHot {
+  color: $color-error;
+}
+
+.statusOk {
+  color: $color-success;
+}
+
+.checkIcon {
+  font-size: 36rpx;
+  margin-left: $spacing-sm;
+}
+
+.formSection {
+  background: $color-bg-card;
+  border-radius: $radius-lg;
+  padding: $spacing-lg;
+  box-shadow: $shadow-card;
+  margin-bottom: $spacing-md;
+}
+
+.formItem {
+  margin-bottom: $spacing-lg;
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+}
+
+.formLabel {
+  font-size: $font-size-md;
   color: $color-text-primary;
   margin-bottom: $spacing-sm;
   display: block;
+  font-weight: $font-weight-medium;
 }
 
-.desc {
+.formLabelRequired {
+  color: $color-error;
+  margin-right: 4rpx;
+}
+
+.formInput {
+  width: 100%;
+  height: 88rpx;
+  padding: 0 $spacing-md;
+  background: $color-bg-page;
+  border: 1rpx solid $color-border;
+  border-radius: $radius-md;
   font-size: $font-size-md;
-  color: $color-text-tertiary;
+  color: $color-text-primary;
+  box-sizing: border-box;
+
+  &:focus {
+    border-color: $color-primary;
+    background: $color-bg-card;
+  }
+}
+
+.formTextarea {
+  width: 100%;
+  height: 200rpx;
+  padding: $spacing-md;
+  background: $color-bg-page;
+  border: 1rpx solid $color-border;
+  border-radius: $radius-md;
+  font-size: $font-size-md;
+  color: $color-text-primary;
+  box-sizing: border-box;
+  line-height: 1.6;
+}
+
+.waitlistTip {
+  background: linear-gradient(135deg, #FFF9E6 0%, #FFF3CD 100%);
+  border-radius: $radius-md;
+  padding: $spacing-md;
+  margin-bottom: $spacing-md;
+  display: flex;
+  align-items: flex-start;
+}
+
+.waitlistIcon {
+  font-size: 36rpx;
+  margin-right: $spacing-sm;
+  flex-shrink: 0;
+}
+
+.waitlistText {
+  flex: 1;
+  font-size: $font-size-sm;
+  color: $color-text-secondary;
+  line-height: 1.6;
+}
+
+.bottomBar {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: $color-bg-card;
+  padding: $spacing-md $page-padding;
+  padding-bottom: calc($spacing-md + env(safe-area-inset-bottom));
+  box-shadow: 0 -4rpx 16rpx rgba(0, 0, 0, 0.08);
+  z-index: 100;
+}
+
+.submitBtn {
+  @include button-reset;
+  width: 100%;
+  height: $button-height-lg;
+  background: linear-gradient(135deg, $color-primary 0%, $color-secondary 100%);
+  color: $color-text-white;
+  font-size: $font-size-lg;
+  font-weight: $font-weight-semibold;
+  border-radius: $radius-button;
+
+  &:active {
+    opacity: 0.9;
+    transform: scale(0.98);
+  }
+}
+
+.submitBtnDisabled {
+  background: $color-text-disabled;
 }
