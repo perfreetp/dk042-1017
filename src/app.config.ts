@@ -13,7 +13,9 @@ export default defineAppConfig({
     'pages/feedback/index',
     'pages/certify/index',
     'pages/review/index',
-    'pages/checkin/index'
+    'pages/checkin/index',
+    'pages/students/index',
+    'pages/reviewlist/index'
   ],
   window: {
     backgroundTextStyle: 'light',

@@ -68,6 +68,7 @@ interface AppContextType extends AppState {
   teacherCheckInStudent: (sessionId: string, studentId: string) => void;
   reviewCourse: (courseId: string, action: 'approve' | 'reject', rejectReason?: string) => void;
   markNotificationRead: (id: string) => void;
+  submitTeacherFeedback: (enrolledId: string, feedback: string) => void;
 }
 
 const AppContext = createContext<AppContextType | undefined>(undefined);
@@ -268,8 +269,11 @@ export const AppProvider: React.FC<AppProviderProps> = ({ children }) => {
       if (c.id === courseId) {
         return {
           ...c,
+          enrolledCount: c.enrolledCount + 1,
           sessions: c.sessions.map(s =>
-            s.id === sessionId ? { ...s, waitlist: Math.max(0, s.waitlist - 1) } : s
+            s.id === sessionId
+              ? { ...s, waitlist: Math.max(0, s.waitlist - 1), enrolled: s.enrolled + 1 }
+              : s
           )
         };
       }
@@ -478,6 +482,25 @@ export const AppProvider: React.FC<AppProviderProps> = ({ children }) => {
     ));
   }, []);
 
+  const submitTeacherFeedback = useCallback((enrolledId: string, feedback: string) => {
+    console.log('[AppContext] submitTeacherFeedback:', { enrolledId, feedback });
+
+    const enrolled = enrolledCourses.find(e => e.id === enrolledId);
+    if (!enrolled) return;
+
+    setEnrolledCourses(prev => prev.map(e =>
+      e.id === enrolledId
+        ? { ...e, hasFeedback: true, feedbackContent: feedback }
+        : e
+    ));
+
+    addNotification(
+      '收到老师反馈',
+      `您的「${enrolled.courseTitle}」收到老师的新反馈，快去查看吧！`,
+      'review'
+    );
+  }, [enrolledCourses, addNotification]);
+
   const value: AppContextType = {
     courses,
     enrolledCourses,
@@ -500,7 +523,8 @@ export const AppProvider: React.FC<AppProviderProps> = ({ children }) => {
     studentCheckIn,
     teacherCheckInStudent,
     reviewCourse,
-    markNotificationRead
+    markNotificationRead,
+    submitTeacherFeedback
   };
 
   return (

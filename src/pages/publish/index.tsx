@@ -1,21 +1,23 @@
 import React from 'react';
 import { View, Text, Image, Button } from '@tarojs/components';
 import Taro from '@tarojs/taro';
+import classnames from 'classnames';
 import styles from './index.module.scss';
-import { publishedCourses } from '@/data/courses';
-import { currentUser } from '@/data/user';
+import { useApp } from '@/store/app';
 import { getStatusText, getStatusColor } from '@/utils';
 
 const PublishPage: React.FC = () => {
+  const { publishedCourses, user } = useApp();
+
   const handlePublish = () => {
     console.log('[Publish] Click publish course');
-    if (!currentUser.certified) {
+    if (!user.certified) {
       Taro.showModal({
         title: '尚未认证资质',
         content: '发布课程前请先完成老师资质认证，是否前往认证？',
         success: (res) => {
           if (res.confirm) {
-            Taro.showToast({ title: '前往资质认证', icon: 'none' });
+            Taro.navigateTo({ url: '/pages/certify/index' });
           }
         }
       });
@@ -31,7 +33,17 @@ const PublishPage: React.FC = () => {
 
   const handleCertify = () => {
     console.log('[Publish] Click certify');
-    Taro.showToast({ title: '资质认证功能开发中', icon: 'none' });
+    Taro.navigateTo({ url: '/pages/certify/index' });
+  };
+
+  const handleViewStudents = (courseId: string, courseTitle: string) => {
+    console.log('[Publish] View students:', courseId);
+    Taro.navigateTo({ url: `/pages/students/index?courseId=${courseId}&title=${encodeURIComponent(courseTitle)}` });
+  };
+
+  const handleViewReviews = (courseId: string, courseTitle: string) => {
+    console.log('[Publish] View reviews:', courseId);
+    Taro.navigateTo({ url: `/pages/reviewlist/index?courseId=${courseId}&title=${encodeURIComponent(courseTitle)}` });
   };
 
   return (
@@ -45,12 +57,12 @@ const PublishPage: React.FC = () => {
 
         <View className={styles.teacherStatus}>
           <Text className={styles.statusIcon}>
-            {currentUser.certified ? '✅' : '📋'}
+            {user.certified ? '✅' : '📋'}
           </Text>
           <Text className={styles.statusText}>
-            {currentUser.certified ? '已完成老师资质认证' : '尚未完成老师资质认证'}
+            {user.certified ? '已完成老师资质认证' : '尚未完成老师资质认证'}
           </Text>
-          {!currentUser.certified && (
+          {!user.certified && (
             <Text className={styles.statusLink} onClick={handleCertify}>
               去认证
             </Text>
@@ -72,7 +84,7 @@ const PublishPage: React.FC = () => {
           </View>
         ) : (
           publishedCourses.map(course => (
-            <View key={course.id} className={styles.myCourseCard}>
+            <View key={course.id} className={classnames(styles.myCourseCard, course.status === 'rejected' && styles.rejectedCard)}>
               <Image className={styles.cover} src={course.cover} mode="aspectFill" />
               <View className={styles.courseInfo}>
                 <Text className={styles.courseTitle}>{course.title}</Text>
@@ -82,6 +94,12 @@ const PublishPage: React.FC = () => {
                 <Text className={styles.courseMeta}>
                   下次课：{course.nextSession}
                 </Text>
+                {course.status === 'rejected' && course.rejectReason && (
+                  <View className={styles.rejectBox}>
+                    <Text className={styles.rejectLabel}>📝 驳回原因：</Text>
+                    <Text className={styles.rejectText}>{course.rejectReason}</Text>
+                  </View>
+                )}
                 <View className={styles.courseFooter}>
                   <View
                     className={styles.statusBadge}
@@ -89,9 +107,27 @@ const PublishPage: React.FC = () => {
                   >
                     {getStatusText(course.status)}
                   </View>
-                  <Button className={styles.manageBtn} onClick={() => handleManage(course.id)}>
-                    管理
-                  </Button>
+                  <View className={styles.actionBtns}>
+                    {course.status === 'approved' && (
+                      <>
+                        <Button
+                          className={styles.secondaryBtn}
+                          onClick={() => handleViewStudents(course.id, course.title)}
+                        >
+                          学员
+                        </Button>
+                        <Button
+                          className={styles.secondaryBtn}
+                          onClick={() => handleViewReviews(course.id, course.title)}
+                        >
+                          评价
+                        </Button>
+                      </>
+                    )}
+                    <Button className={styles.manageBtn} onClick={() => handleManage(course.id)}>
+                      管理
+                    </Button>
+                  </View>
                 </View>
               </View>
             </View>

@@ -155,6 +155,53 @@
   }
 }
 
+.secondaryBtn {
+  @include button-reset;
+  padding: 8rpx 20rpx;
+  border-radius: $radius-button;
+  background: rgba(255, 107, 53, 0.1);
+  color: $color-primary;
+  font-size: $font-size-xs;
+  height: auto;
+  margin-right: 8rpx;
+
+  &:active {
+    opacity: 0.8;
+  }
+}
+
+.actionBtns {
+  display: flex;
+  align-items: center;
+}
+
+.rejectedCard {
+  background: linear-gradient(135deg, #FFF8F0 0%, #FFECE8 100%);
+  border: 2rpx solid rgba(245, 63, 63, 0.15);
+}
+
+.rejectBox {
+  margin-top: $spacing-sm;
+  padding: $spacing-sm $spacing-md;
+  background: rgba(255, 255, 255, 0.7);
+  border-radius: $radius-xs;
+  border-left: 4rpx solid $color-error;
+}
+
+.rejectLabel {
+  font-size: $font-size-xs;
+  color: $color-error;
+  font-weight: $font-weight-medium;
+  display: block;
+  margin-bottom: 4rpx;
+}
+
+.rejectText {
+  font-size: $font-size-xs;
+  color: $color-text-secondary;
+  line-height: 1.5;
+}
+
 .tipCard {
   margin-top: $spacing-lg;
   background: linear-gradient(135deg, #FFF9E6 0%, #FFF3CD 100%);
