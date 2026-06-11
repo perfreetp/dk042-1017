@@ -45,7 +45,7 @@ const ReviewPage: React.FC = () => {
       return;
     }
     if (selectedCourse) {
-      reviewCourse(selectedCourse, 'reject');
+      reviewCourse(selectedCourse, 'reject', rejectReason);
       Taro.showToast({ title: '已驳回', icon: 'success' });
       setSelectedCourse(null);
       setRejectReason('');
@@ -102,12 +102,12 @@ const ReviewPage: React.FC = () => {
       )}
 
       {filteredCourses.length === 0 ? (
-        <EmptyState 
-          icon="📋" 
+        <EmptyState
+          icon="📋"
           text={
-            activeTab === 'pending' ? '暂无待审核课程' : 
+            activeTab === 'pending' ? '暂无待审核课程' :
             activeTab === 'approved' ? '暂无已通过课程' : '暂无未通过课程'
-          } 
+          }
         />
       ) : (
         filteredCourses.map(course => (
@@ -127,6 +127,12 @@ const ReviewPage: React.FC = () => {
               >
                 {getStatusText(course.status)}
               </View>
+              {course.status === 'rejected' && course.rejectReason && (
+                <View className={styles.rejectReasonBox}>
+                  <Text className={styles.rejectReasonLabel}>📝 驳回原因：</Text>
+                  <Text className={styles.rejectReasonText}>{course.rejectReason}</Text>
+                </View>
+              )}
               {course.status === 'pending' && !selectedCourse && (
                 <View className={styles.actionRow}>
                   <Button

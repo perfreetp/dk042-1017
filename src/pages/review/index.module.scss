@@ -165,3 +165,25 @@
   box-sizing: border-box;
   margin-bottom: $spacing-md;
 }
+
+.rejectReasonBox {
+  margin-top: $spacing-sm;
+  padding: $spacing-sm $spacing-md;
+  background: linear-gradient(135deg, #FFF1F0 0%, #FFECE8 100%);
+  border-radius: $radius-xs;
+  border-left: 4rpx solid $color-error;
+}
+
+.rejectReasonLabel {
+  font-size: $font-size-xs;
+  color: $color-error;
+  font-weight: $font-weight-medium;
+  display: block;
+  margin-bottom: 4rpx;
+}
+
+.rejectReasonText {
+  font-size: $font-size-xs;
+  color: $color-text-secondary;
+  line-height: 1.5;
+}

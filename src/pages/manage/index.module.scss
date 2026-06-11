@@ -2,25 +2,130 @@
 
 .page {
   min-height: 100vh;
-  padding: $spacing-xl * 2 $page-padding;
-  text-align: center;
+  background: $color-bg-page;
 }
 
-.icon {
-  font-size: 120rpx;
-  margin-bottom: $spacing-lg;
+.scrollWrap {
+  height: 100vh;
+  padding: 0 $page-padding;
+  padding-bottom: 120rpx;
+}
+
+.header {
+  padding: $spacing-lg 0 $spacing-md;
+}
+
+.headerTitle {
+  font-size: $font-size-xl;
+  font-weight: $font-weight-bold;
+  color: $color-text-primary;
   display: block;
 }
 
-.title {
-  font-size: $font-size-xxl;
+.headerSubtitle {
+  font-size: $font-size-sm;
+  color: $color-text-secondary;
+  margin-top: $spacing-xs;
+  display: block;
+}
+
+.tabBar {
+  display: flex;
+  background: $color-bg-card;
+  border-radius: $radius-button;
+  padding: 8rpx;
+  margin-bottom: $spacing-md;
+  box-shadow: $shadow-card;
+}
+
+.tabItem {
+  flex: 1;
+  text-align: center;
+  padding: 16rpx 0;
+  border-radius: $radius-button;
+  font-size: $font-size-sm;
+  color: $color-text-secondary;
+  transition: all $transition-base;
+}
+
+.tabItemActive {
+  background: linear-gradient(135deg, $color-primary 0%, $color-secondary 100%);
+  color: $color-text-white;
+  font-weight: $font-weight-semibold;
+}
+
+.courseCard {
+  background: $color-bg-card;
+  border-radius: $radius-lg;
+  padding: $spacing-md;
+  margin-bottom: $spacing-md;
+  box-shadow: $shadow-card;
+  display: flex;
+}
+
+.cover {
+  width: 180rpx;
+  height: 135rpx;
+  border-radius: $radius-md;
+  margin-right: $spacing-md;
+  flex-shrink: 0;
+}
+
+.courseInfo {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.titleRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: $spacing-sm;
+}
+
+.courseTitle {
+  font-size: $font-size-md;
   font-weight: $font-weight-semibold;
   color: $color-text-primary;
-  margin-bottom: $spacing-sm;
-  display: block;
+  flex: 1;
+  @include text-ellipsis;
+  line-height: 1.4;
 }
 
-.desc {
-  font-size: $font-size-md;
-  color: $color-text-tertiary;
+.statusBadge {
+  padding: 4rpx 16rpx;
+  border-radius: $radius-xs;
+  font-size: $font-size-xs;
+  color: $color-text-white;
+  margin-left: $spacing-sm;
+  flex-shrink: 0;
+}
+
+.courseMeta {
+  font-size: $font-size-xs;
+  color: $color-text-secondary;
+  margin-bottom: 4rpx;
+}
+
+.rejectBox {
+  margin-top: $spacing-sm;
+  padding: $spacing-sm $spacing-md;
+  background: linear-gradient(135deg, #FFF1F0 0%, #FFECE8 100%);
+  border-radius: $radius-xs;
+  border-left: 4rpx solid $color-error;
+}
+
+.rejectLabel {
+  font-size: $font-size-xs;
+  color: $color-error;
+  font-weight: $font-weight-medium;
+  display: block;
+  margin-bottom: 4rpx;
+}
+
+.rejectText {
+  font-size: $font-size-xs;
+  color: $color-text-secondary;
+  line-height: 1.5;
 }

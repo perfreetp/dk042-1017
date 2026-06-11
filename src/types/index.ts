@@ -11,6 +11,7 @@ export interface CourseSession {
   time: string;
   capacity: number;
   enrolled: number;
+  waitlist: number;
 }
 
 export interface Teacher {
@@ -51,10 +52,16 @@ export interface EnrolledCourse {
   teacherName: string;
   sessionDate: string;
   sessionTime: string;
-  status: 'upcoming' | 'completed' | 'cancelled';
-  canUpload: boolean;
-  canReview: boolean;
+  sessionId: string;
+  status: 'upcoming' | 'completed' | 'cancelled' | 'waitlist';
+  waitlistPosition?: number;
+  workUploaded: boolean;
+  workImage?: string;
+  reviewSubmitted: boolean;
+  reviewRating?: number;
+  reviewContent?: string;
   hasFeedback: boolean;
+  feedbackContent?: string;
 }
 
 export interface PublishedCourse {
@@ -65,6 +72,7 @@ export interface PublishedCourse {
   maxStudents: number;
   status: 'pending' | 'approved' | 'rejected';
   nextSession: string;
+  rejectReason?: string;
 }
 
 export interface Notification {
@@ -101,4 +109,12 @@ export interface Review {
   rating: number;
   content: string;
   createdAt: string;
+}
+
+export interface CheckInStudent {
+  id: string;
+  name: string;
+  avatar: string;
+  checkedIn: boolean;
+  checkedAt?: string;
 }

@@ -17,6 +17,7 @@ export const getStatusText = (status: string): string => {
     upcoming: '待上课',
     completed: '已完成',
     cancelled: '已取消',
+    waitlist: '候补中',
     pending: '审核中',
     approved: '已通过',
     rejected: '未通过'
@@ -32,6 +33,7 @@ export const getStatusColor = (status: string): string => {
     upcoming: '#FF7D00',
     completed: '#00B42A',
     cancelled: '#F53F3F',
+    waitlist: '#FF6B35',
     pending: '#FF7D00',
     approved: '#00B42A',
     rejected: '#F53F3F'

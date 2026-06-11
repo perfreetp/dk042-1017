@@ -7,7 +7,7 @@ import { useApp } from '@/store/app';
 
 const UploadPage: React.FC = () => {
   const router = useRouter();
-  const courseId = router.params.id;
+  const enrolledId = router.params.id;
   const type = router.params.type || 'work';
   const { courses, enrolledCourses, submitWork, submitReview } = useApp();
 
@@ -16,8 +16,8 @@ const UploadPage: React.FC = () => {
   const [rating, setRating] = useState(5);
   const [content, setContent] = useState('');
 
-  const course = courses.find(c => c.id === courseId);
-  const enrolled = enrolledCourses.find(e => e.courseId === courseId);
+  const enrolled = enrolledCourses.find(e => e.id === enrolledId);
+  const course = enrolled ? courses.find(c => c.id === enrolled.courseId) : undefined;
 
   const ratingLabels = ['很差', '较差', '一般', '满意', '非常满意'];
 
@@ -65,8 +65,8 @@ const UploadPage: React.FC = () => {
 
     if (mode === 'work' && enrolled) {
       submitWork(enrolled.id, images[0]);
-    } else if (mode === 'review' && course) {
-      submitReview(course.id, rating, content, images[0]);
+    } else if (mode === 'review' && enrolled) {
+      submitReview(enrolled.id, rating, content, images[0]);
     }
 
     Taro.showToast({ 

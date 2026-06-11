@@ -19,8 +19,8 @@ export const courses: Course[] = [
     maxStudents: 12,
     enrolledCount: 8,
     sessions: [
-      { id: 's001', date: '2026-06-15', time: '14:00-15:30', capacity: 12, enrolled: 4 },
-      { id: 's002', date: '2026-06-22', time: '14:00-15:30', capacity: 12, enrolled: 4 }
+      { id: 's001', date: '2026-06-15', time: '14:00-15:30', capacity: 12, enrolled: 4, waitlist: 2 },
+      { id: 's002', date: '2026-06-22', time: '14:00-15:30', capacity: 12, enrolled: 4, waitlist: 0 }
     ],
     materialFee: 30,
     suitableAge: '4-10岁亲子',
@@ -49,7 +49,7 @@ export const courses: Course[] = [
     maxStudents: 20,
     enrolledCount: 15,
     sessions: [
-      { id: 's003', date: '2026-06-18', time: '19:00-20:30', capacity: 20, enrolled: 15 }
+      { id: 's003', date: '2026-06-18', time: '19:00-20:30', capacity: 20, enrolled: 15, waitlist: 3 }
     ],
     materialFee: 0,
     suitableAge: '16岁以上',
@@ -78,8 +78,8 @@ export const courses: Course[] = [
     maxStudents: 8,
     enrolledCount: 6,
     sessions: [
-      { id: 's004', date: '2026-06-20', time: '10:00-12:00', capacity: 8, enrolled: 6 },
-      { id: 's005', date: '2026-06-27', time: '10:00-12:00', capacity: 8, enrolled: 0 }
+      { id: 's004', date: '2026-06-20', time: '10:00-12:00', capacity: 8, enrolled: 6, waitlist: 0 },
+      { id: 's005', date: '2026-06-27', time: '10:00-12:00', capacity: 8, enrolled: 0, waitlist: 0 }
     ],
     materialFee: 50,
     suitableAge: '18岁以上',
@@ -108,7 +108,7 @@ export const courses: Course[] = [
     maxStudents: 10,
     enrolledCount: 7,
     sessions: [
-      { id: 's006', date: '2026-06-16', time: '19:30-21:00', capacity: 10, enrolled: 7 }
+      { id: 's006', date: '2026-06-16', time: '19:30-21:00', capacity: 10, enrolled: 7, waitlist: 1 }
     ],
     materialFee: 0,
     suitableAge: '8岁以上',
@@ -137,7 +137,7 @@ export const courses: Course[] = [
     maxStudents: 15,
     enrolledCount: 12,
     sessions: [
-      { id: 's007', date: '2026-06-14', time: '09:00-10:00', capacity: 15, enrolled: 12 }
+      { id: 's007', date: '2026-06-14', time: '09:00-10:00', capacity: 15, enrolled: 12, waitlist: 0 }
     ],
     materialFee: 0,
     suitableAge: '45岁以上',
@@ -166,7 +166,7 @@ export const courses: Course[] = [
     maxStudents: 18,
     enrolledCount: 10,
     sessions: [
-      { id: 's008', date: '2026-06-17', time: '14:00-16:00', capacity: 18, enrolled: 10 }
+      { id: 's008', date: '2026-06-17', time: '14:00-16:00', capacity: 18, enrolled: 10, waitlist: 0 }
     ],
     materialFee: 0,
     suitableAge: '中老年',
@@ -195,7 +195,7 @@ export const courses: Course[] = [
     maxStudents: 10,
     enrolledCount: 9,
     sessions: [
-      { id: 's009', date: '2026-06-19', time: '15:00-16:30', capacity: 10, enrolled: 9 }
+      { id: 's009', date: '2026-06-19', time: '15:00-16:30', capacity: 10, enrolled: 9, waitlist: 5 }
     ],
     materialFee: 20,
     suitableAge: '5-10岁',
@@ -224,7 +224,7 @@ export const courses: Course[] = [
     maxStudents: 16,
     enrolledCount: 11,
     sessions: [
-      { id: 's010', date: '2026-06-21', time: '14:00-16:00', capacity: 16, enrolled: 11 }
+      { id: 's010', date: '2026-06-21', time: '14:00-16:00', capacity: 16, enrolled: 11, waitlist: 0 }
     ],
     materialFee: 15,
     suitableAge: '8岁以上亲子',
@@ -253,7 +253,7 @@ export const courses: Course[] = [
     maxStudents: 6,
     enrolledCount: 6,
     sessions: [
-      { id: 's011', date: '2026-06-24', time: '10:00-12:00', capacity: 6, enrolled: 6 }
+      { id: 's011', date: '2026-06-24', time: '10:00-12:00', capacity: 6, enrolled: 6, waitlist: 4 }
     ],
     materialFee: 45,
     suitableAge: '18岁以上',
@@ -282,7 +282,7 @@ export const courses: Course[] = [
     maxStudents: 10,
     enrolledCount: 5,
     sessions: [
-      { id: 's012', date: '2026-06-23', time: '16:00-18:00', capacity: 10, enrolled: 5 }
+      { id: 's012', date: '2026-06-23', time: '16:00-18:00', capacity: 10, enrolled: 5, waitlist: 0 }
     ],
     materialFee: 0,
     suitableAge: '16岁以上',
@@ -304,10 +304,12 @@ export const enrolledCourses: EnrolledCourse[] = [
     teacherName: '王老师',
     sessionDate: '2026-06-08',
     sessionTime: '14:00-15:30',
+    sessionId: 's001',
     status: 'completed',
-    canUpload: true,
-    canReview: true,
-    hasFeedback: true
+    workUploaded: false,
+    reviewSubmitted: false,
+    hasFeedback: true,
+    feedbackContent: '作品完成度很高，色彩搭配很棒，继续保持！下节课可以尝试更复杂的造型。'
   },
   {
     id: 'e002',
@@ -317,9 +319,11 @@ export const enrolledCourses: EnrolledCourse[] = [
     teacherName: '刘医生',
     sessionDate: '2026-06-07',
     sessionTime: '09:00-10:00',
+    sessionId: 's007',
     status: 'completed',
-    canUpload: false,
-    canReview: true,
+    workUploaded: true,
+    workImage: 'https://picsum.photos/id/1025/400/400',
+    reviewSubmitted: false,
     hasFeedback: false
   },
   {
@@ -330,9 +334,10 @@ export const enrolledCourses: EnrolledCourse[] = [
     teacherName: '陈老师',
     sessionDate: '2026-06-20',
     sessionTime: '10:00-12:00',
+    sessionId: 's004',
     status: 'upcoming',
-    canUpload: false,
-    canReview: false,
+    workUploaded: false,
+    reviewSubmitted: false,
     hasFeedback: false
   },
   {
@@ -343,9 +348,40 @@ export const enrolledCourses: EnrolledCourse[] = [
     teacherName: '孙老师',
     sessionDate: '2026-06-17',
     sessionTime: '14:00-16:00',
+    sessionId: 's008',
     status: 'upcoming',
-    canUpload: false,
-    canReview: false,
+    workUploaded: false,
+    reviewSubmitted: false,
+    hasFeedback: false
+  },
+  {
+    id: 'e005',
+    courseId: 'c007',
+    courseTitle: '儿童英语口语启蒙',
+    cover: 'https://picsum.photos/id/1025/600/400',
+    teacherName: 'Emily老师',
+    sessionDate: '2026-06-19',
+    sessionTime: '15:00-16:30',
+    sessionId: 's009',
+    status: 'waitlist',
+    waitlistPosition: 2,
+    workUploaded: false,
+    reviewSubmitted: false,
+    hasFeedback: false
+  },
+  {
+    id: 'e006',
+    courseId: 'c009',
+    courseTitle: '家庭烘焙：面包基础',
+    cover: 'https://picsum.photos/id/312/600/400',
+    teacherName: '陈老师',
+    sessionDate: '2026-06-24',
+    sessionTime: '10:00-12:00',
+    sessionId: 's011',
+    status: 'waitlist',
+    waitlistPosition: 1,
+    workUploaded: false,
+    reviewSubmitted: false,
     hasFeedback: false
   }
 ];

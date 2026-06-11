@@ -157,3 +157,132 @@
   color: $color-text-secondary;
   line-height: 1.6;
 }
+
+.scrollWrap {
+  height: calc(100vh - 140rpx);
+}
+
+.scanBtn {
+  @include button-reset;
+  margin-top: $spacing-md;
+  height: $button-height-md;
+  border-radius: $radius-button;
+  font-size: $font-size-sm;
+  width: 100%;
+}
+
+.sessionTabs {
+  margin-bottom: $spacing-md;
+}
+
+.sessionList {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-sm;
+}
+
+.sessionItem {
+  display: flex;
+  align-items: center;
+  background: $color-bg-card;
+  border-radius: $radius-md;
+  padding: $spacing-md;
+  border: 2rpx solid transparent;
+  transition: all $transition-base;
+
+  &:active {
+    opacity: 0.8;
+  }
+}
+
+.sessionItemActive {
+  border-color: $color-primary;
+  background: linear-gradient(135deg, #FFF8F0 0%, #FFEFE0 100%);
+}
+
+.sessionInfo {
+  flex: 1;
+}
+
+.sessionTitle {
+  font-size: $font-size-md;
+  font-weight: $font-weight-semibold;
+  color: $color-text-primary;
+  display: block;
+  margin-bottom: 6rpx;
+}
+
+.sessionMeta {
+  font-size: $font-size-xs;
+  color: $color-text-secondary;
+  display: block;
+  margin-top: 4rpx;
+}
+
+.sessionProgress {
+  text-align: center;
+  padding-left: $spacing-md;
+  border-left: 1rpx solid $color-divider;
+}
+
+.progressValue {
+  font-size: $font-size-xl;
+  font-weight: $font-weight-bold;
+  display: block;
+}
+
+.progressLabel {
+  font-size: $font-size-xs;
+  color: $color-text-tertiary;
+}
+
+.studentSection {
+  margin-top: $spacing-md;
+}
+
+.studentCard {
+  display: flex;
+  align-items: center;
+  background: $color-bg-card;
+  border-radius: $radius-md;
+  padding: $spacing-md;
+  margin-bottom: $spacing-sm;
+  box-shadow: $shadow-card;
+}
+
+.studentCardDone {
+  opacity: 0.75;
+}
+
+.studentAvatar {
+  width: 80rpx;
+  height: 80rpx;
+  border-radius: 50%;
+  margin-right: $spacing-md;
+  flex-shrink: 0;
+}
+
+.studentInfo {
+  flex: 1;
+}
+
+.studentName {
+  font-size: $font-size-md;
+  font-weight: $font-weight-medium;
+  color: $color-text-primary;
+  display: block;
+}
+
+.studentStatus {
+  font-size: $font-size-xs;
+  color: #FF7D00;
+  margin-top: 4rpx;
+  display: block;
+}
+
+.studentStatusDone {
+  font-size: $font-size-xs;
+  color: $color-success;
+  margin-top: 4rpx;
+  display: block;
+}

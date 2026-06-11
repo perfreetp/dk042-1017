@@ -142,6 +142,7 @@ const EnrollPage: React.FC = () => {
                 <View className={styles.sessionRight}>
                   <Text className={styles.sessionCount}>
                     {session.enrolled}/{session.capacity}人
+                    {session.waitlist > 0 && ` (候补${session.waitlist}人)`}
                   </Text>
                   <Text className={classnames(
                     styles.sessionStatus,
