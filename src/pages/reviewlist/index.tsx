@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo, useEffect } from 'react';
 import { View, Text, Image, Button, ScrollView, Textarea } from '@tarojs/components';
 import Taro from '@tarojs/taro';
 import { useRouter } from '@tarojs/taro';
@@ -11,10 +11,11 @@ const ReviewListPage: React.FC = () => {
   const router = useRouter();
   const courseId = router.params.courseId as string;
   const courseTitle = router.params.title ? decodeURIComponent(router.params.title as string) : '';
+  const hasFixedCourse = !!courseId;
 
   const { courses, enrolledCourses, submitTeacherFeedback } = useApp();
 
-  const [activeCourseId, setActiveCourseId] = useState<string>(courseId || courses[0]?.id || '');
+  const [activeCourseId, setActiveCourseId] = useState<string>(courseId || '');
   const [activeTab, setActiveTab] = useState<'work' | 'review'>('work');
   const [feedbackModal, setFeedbackModal] = useState<{ visible: boolean; enrolledId: string; studentName: string }>({ visible: false, enrolledId: '', studentName: '' });
   const [feedbackText, setFeedbackText] = useState('');
@@ -29,8 +30,16 @@ const ReviewListPage: React.FC = () => {
     });
   }, [courses, enrolledCourses]);
 
+  // 如果没有指定课程且有内容的课程存在，默认选第一个
+  useEffect(() => {
+    if (!hasFixedCourse && !activeCourseId && coursesWithContent.length > 0) {
+      setActiveCourseId(coursesWithContent[0].id);
+    }
+  }, [hasFixedCourse, activeCourseId, coursesWithContent]);
+
   // 当前课程的作品/评价
   const allEntries = useMemo(() => {
+    if (!activeCourseId) return [];
     const list = enrolledCourses.filter(e => e.courseId === activeCourseId);
     if (activeTab === 'work') {
       return list.filter(e => e.workUploaded);
@@ -131,7 +140,7 @@ const ReviewListPage: React.FC = () => {
                   mode="aspectFill"
                 />
                 <View className={styles.entryInfo}>
-                  <Text className={styles.studentName}>学员 #{idx + 1}</Text>
+                  <Text className={styles.studentName}>{enrolled.studentName}</Text>
                   <Text className={styles.entryTime}>
                     {enrolled.sessionDate} {enrolled.sessionTime}
                   </Text>
@@ -187,7 +196,7 @@ const ReviewListPage: React.FC = () => {
                     setFeedbackModal({
                       visible: true,
                       enrolledId: enrolled.id,
-                      studentName: `学员 #${idx + 1}`
+                      studentName: enrolled.studentName
                     });
                   }}
                 >

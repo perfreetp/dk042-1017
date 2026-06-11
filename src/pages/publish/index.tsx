@@ -112,13 +112,13 @@ const PublishPage: React.FC = () => {
                       <>
                         <Button
                           className={styles.secondaryBtn}
-                          onClick={() => handleViewStudents(course.id, course.title)}
+                          onClick={() => handleViewStudents(course.courseId, course.title)}
                         >
                           学员
                         </Button>
                         <Button
                           className={styles.secondaryBtn}
-                          onClick={() => handleViewReviews(course.id, course.title)}
+                          onClick={() => handleViewReviews(course.courseId, course.title)}
                         >
                           评价
                         </Button>

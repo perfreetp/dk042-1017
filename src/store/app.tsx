@@ -69,6 +69,7 @@ interface AppContextType extends AppState {
   reviewCourse: (courseId: string, action: 'approve' | 'reject', rejectReason?: string) => void;
   markNotificationRead: (id: string) => void;
   submitTeacherFeedback: (enrolledId: string, feedback: string) => void;
+  checkInEnrolled: (enrolledId: string) => void;
 }
 
 const AppContext = createContext<AppContextType | undefined>(undefined);
@@ -181,6 +182,9 @@ export const AppProvider: React.FC<AppProviderProps> = ({ children }) => {
         sessionId: session.id,
         status: 'waitlist',
         waitlistPosition: waitlistCount + 1,
+        studentName,
+        phone,
+        checkedIn: false,
         workUploaded: false,
         reviewSubmitted: false,
         hasFeedback: false
@@ -210,6 +214,9 @@ export const AppProvider: React.FC<AppProviderProps> = ({ children }) => {
         sessionTime: session.time,
         sessionId: session.id,
         status: 'upcoming',
+        studentName,
+        phone,
+        checkedIn: false,
         workUploaded: false,
         reviewSubmitted: false,
         hasFeedback: false
@@ -501,6 +508,29 @@ export const AppProvider: React.FC<AppProviderProps> = ({ children }) => {
     );
   }, [enrolledCourses, addNotification]);
 
+  const checkInEnrolled = useCallback((enrolledId: string) => {
+    console.log('[AppContext] checkInEnrolled:', enrolledId);
+
+    const enrolled = enrolledCourses.find(e => e.id === enrolledId);
+    if (!enrolled || enrolled.checkedIn) return;
+
+    setEnrolledCourses(prev => prev.map(e =>
+      e.id === enrolledId
+        ? {
+            ...e,
+            checkedIn: true,
+            checkedAt: new Date().toLocaleTimeString('zh-CN', { hour: '2-digit', minute: '2-digit' })
+          }
+        : e
+    ));
+
+    addNotification(
+      '签到成功',
+      `「${enrolled.courseTitle}」学员 ${enrolled.studentName} 签到成功！`,
+      'system'
+    );
+  }, [enrolledCourses, addNotification]);
+
   const value: AppContextType = {
     courses,
     enrolledCourses,
@@ -524,7 +554,8 @@ export const AppProvider: React.FC<AppProviderProps> = ({ children }) => {
     teacherCheckInStudent,
     reviewCourse,
     markNotificationRead,
-    submitTeacherFeedback
+    submitTeacherFeedback,
+    checkInEnrolled
   };
 
   return (

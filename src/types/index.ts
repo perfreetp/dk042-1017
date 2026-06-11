@@ -55,6 +55,10 @@ export interface EnrolledCourse {
   sessionId: string;
   status: 'upcoming' | 'completed' | 'cancelled' | 'waitlist';
   waitlistPosition?: number;
+  studentName: string;
+  phone: string;
+  checkedIn: boolean;
+  checkedAt?: string;
   workUploaded: boolean;
   workImage?: string;
   reviewSubmitted: boolean;
@@ -66,6 +70,7 @@ export interface EnrolledCourse {
 
 export interface PublishedCourse {
   id: string;
+  courseId: string;
   title: string;
   cover: string;
   enrolledCount: number;

@@ -13,16 +13,16 @@ const StudentsPage: React.FC = () => {
   const courseId = router.params.courseId as string;
   const courseTitle = router.params.title ? decodeURIComponent(router.params.title as string) : '';
 
-  const { courses, enrolledCourses, submitTeacherFeedback } = useApp();
+  const { courses, enrolledCourses, submitTeacherFeedback, checkInEnrolled } = useApp();
 
   const [activeSessionId, setActiveSessionId] = useState<string>('');
   const [activeTab, setActiveTab] = useState<'enrolled' | 'waitlist' | 'cancelled'>('enrolled');
   const [feedbackModal, setFeedbackModal] = useState<{ visible: boolean; enrolledId: string; studentName: string }>({ visible: false, enrolledId: '', studentName: '' });
   const [feedbackText, setFeedbackText] = useState('');
 
-  const course = courses.find(c => c.id === courseId) || courses[0];
-
+  const course = courses.find(c => c.id === courseId);
   const sessions = course?.sessions || [];
+
   const currentSessionId = activeSessionId || sessions[0]?.id || '';
 
   useEffect(() => {
@@ -34,10 +34,10 @@ const StudentsPage: React.FC = () => {
   const currentSession = sessions.find(s => s.id === currentSessionId);
 
   const sessionStudents = useMemo(() => {
-    return enrolledCourses.filter(e => e.courseId === (course?.id || '') && e.sessionId === currentSessionId);
-  }, [enrolledCourses, course?.id, currentSessionId]);
+    return enrolledCourses.filter(e => e.courseId === courseId && e.sessionId === currentSessionId);
+  }, [enrolledCourses, courseId, currentSessionId]);
 
-  const enrolledStudents = sessionStudents.filter(s => s.status === 'upcoming');
+  const enrolledStudents = sessionStudents.filter(s => s.status === 'upcoming' || s.status === 'completed');
   const waitlistStudents = sessionStudents.filter(s => s.status === 'waitlist');
   const cancelledStudents = sessionStudents.filter(s => s.status === 'cancelled');
 
@@ -76,17 +76,42 @@ const StudentsPage: React.FC = () => {
     }
   };
 
+  const handleCheckInStudent = (enrolled: any) => {
+    if (enrolled.checkedIn) {
+      Taro.showToast({ title: '该学员已签到', icon: 'none' });
+      return;
+    }
+    Taro.showModal({
+      title: '确认核销',
+      content: `确定为学员「${enrolled.studentName}」核销签到吗？`,
+      success: (res) => {
+        if (res.confirm) {
+          checkInEnrolled(enrolled.id);
+          Taro.showToast({ title: '核销成功', icon: 'success' });
+        }
+      }
+    });
+  };
+
   const tabs = [
     { id: 'enrolled', name: '已报名', count: enrolledStudents.length },
     { id: 'waitlist', name: '候补', count: waitlistStudents.length },
     { id: 'cancelled', name: '已取消', count: cancelledStudents.length }
   ];
 
+  if (!course) {
+    return (
+      <View className={styles.page}>
+        <EmptyState icon="📚" text="未找到该课程" />
+      </View>
+    );
+  }
+
   return (
     <View className={styles.page}>
       <ScrollView className={styles.scrollWrap} scrollY>
         <View className={styles.header}>
-          <Text className={styles.headerTitle}>{courseTitle || course?.title || '学员管理'}</Text>
+          <Text className={styles.headerTitle}>{courseTitle || course.title || '学员管理'}</Text>
           {currentSession && (
             <View className={styles.sessionOverview}>
               <Text className={styles.sessionText}>
@@ -148,24 +173,34 @@ const StudentsPage: React.FC = () => {
               <View className={styles.studentHeader}>
                 <Image
                   className={styles.studentAvatar}
-                  src={`https://picsum.photos/id/${100 + idx}/200/200`}
+                  src={`https://picsum.photos/id/${200 + idx}/200/200`}
                   mode="aspectFill"
                 />
                 <View className={styles.studentBasic}>
-                  <Text className={styles.studentName}>学员 #{idx + 1}</Text>
-                  <View
-                    className={styles.studentStatus}
-                    style={{ backgroundColor: getStatusColor(enrolled.status) }}
-                  >
-                    {getStatusText(enrolled.status)}
+                  <Text className={styles.studentName}>{enrolled.studentName}</Text>
+                  <Text className={styles.studentPhone}>📞 {enrolled.phone}</Text>
+                  <View style={{ marginTop: 8, display: 'flex', alignItems: 'center', gap: 8 }}>
+                    <View
+                      className={styles.studentStatus}
+                      style={{ backgroundColor: getStatusColor(enrolled.status) }}
+                    >
+                      {getStatusText(enrolled.status)}
+                    </View>
+                    {enrolled.status === 'waitlist' && enrolled.waitlistPosition && (
+                      <Text className={styles.waitlistPos}>候补第 {enrolled.waitlistPosition} 位</Text>
+                    )}
                   </View>
-                  {enrolled.status === 'waitlist' && enrolled.waitlistPosition && (
-                    <Text className={styles.waitlistPos}>候补第 {enrolled.waitlistPosition} 位</Text>
-                  )}
                 </View>
               </View>
 
               <View className={styles.statusGrid}>
+                <View className={classnames(styles.statusItem, enrolled.checkedIn && styles.statusItemOk)}>
+                  <Text className={styles.statusIcon}>{enrolled.checkedIn ? '✅' : '⬜'}</Text>
+                  <Text className={styles.statusText}>已签到</Text>
+                  {enrolled.checkedIn && enrolled.checkedAt && (
+                    <Text className={styles.statusSub}>{enrolled.checkedAt}</Text>
+                  )}
+                </View>
                 <View className={classnames(styles.statusItem, enrolled.workUploaded && styles.statusItemOk)}>
                   <Text className={styles.statusIcon}>{enrolled.workUploaded ? '✅' : '⬜'}</Text>
                   <Text className={styles.statusText}>作品</Text>
@@ -173,10 +208,6 @@ const StudentsPage: React.FC = () => {
                 <View className={classnames(styles.statusItem, enrolled.reviewSubmitted && styles.statusItemOk)}>
                   <Text className={styles.statusIcon}>{enrolled.reviewSubmitted ? '✅' : '⬜'}</Text>
                   <Text className={styles.statusText}>评价</Text>
-                </View>
-                <View className={classnames(styles.statusItem, enrolled.status === 'completed' && styles.statusItemOk)}>
-                  <Text className={styles.statusIcon}>{enrolled.status === 'completed' ? '✅' : '⬜'}</Text>
-                  <Text className={styles.statusText}>签到</Text>
                 </View>
                 <View className={classnames(styles.statusItem, enrolled.hasFeedback && styles.statusItemOk)}>
                   <Text className={styles.statusIcon}>{enrolled.hasFeedback ? '✅' : '⬜'}</Text>
@@ -195,6 +226,12 @@ const StudentsPage: React.FC = () => {
                 {(enrolled.status === 'upcoming' || enrolled.status === 'completed') && (
                   <>
                     <Button
+                      className={classnames(styles.actionBtn, enrolled.checkedIn ? styles.btnDisabled : styles.btnHighlight)}
+                      onClick={() => handleCheckInStudent(enrolled)}
+                    >
+                      {enrolled.checkedIn ? '已签到' : '核销签到'}
+                    </Button>
+                    <Button
                       className={classnames(styles.actionBtn, enrolled.workUploaded ? styles.btnPrimary : styles.btnDisabled)}
                       onClick={() => handleViewWork(enrolled)}
                     >
@@ -207,12 +244,34 @@ const StudentsPage: React.FC = () => {
                       评价
                     </Button>
                     <Button
-                      className={classnames(styles.actionBtn, styles.btnHighlight)}
-                      onClick={() => setFeedbackModal({ visible: true, enrolledId: enrolled.id, studentName: `学员 #${idx + 1}` })}
+                      className={classnames(styles.actionBtn, styles.btnOutline)}
+                      onClick={() => {
+                        setFeedbackText(enrolled.feedbackContent || '');
+                        setFeedbackModal({
+                          visible: true,
+                          enrolledId: enrolled.id,
+                          studentName: enrolled.studentName
+                        });
+                      }}
                     >
-                      {enrolled.hasFeedback ? '修改反馈' : '写反馈'}
+                      {enrolled.hasFeedback ? '改反馈' : '写反馈'}
                     </Button>
                   </>
+                )}
+                {enrolled.status === 'waitlist' && (
+                  <Button
+                    className={classnames(styles.actionBtn, styles.btnOutline)}
+                    onClick={() => {
+                      setFeedbackText(enrolled.feedbackContent || '');
+                      setFeedbackModal({
+                        visible: true,
+                        enrolledId: enrolled.id,
+                        studentName: enrolled.studentName
+                      });
+                    }}
+                  >
+                    发送通知
+                  </Button>
                 )}
               </View>
             </View>
